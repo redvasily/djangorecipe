@@ -16,7 +16,9 @@ def main(settings_file, logfile=None):
     # Setup settings
     management.setup_environ(mod)
 
-    options = {}
+    from django.conf import settings
+
+    options = getattr(settings, 'FASTCGI_OPTIONS', {})
     if logfile:
         options['outlog'] = logfile
         options['errlog'] = logfile
